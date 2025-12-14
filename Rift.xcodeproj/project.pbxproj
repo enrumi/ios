@@ -1,0 +1,513 @@
+﻿// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 60;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B00001 /* RiftApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000 /* RiftApp.swift */; };
+		B00003 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00002 /* ContentView.swift */; };
+		B00005 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B00004 /* Assets.xcassets */; };
+		B00008 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B00007 /* Preview Assets.xcassets */; };
+		E00000 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00000 /* NetworkManager.swift */; };
+		E00001 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00001 /* APIService.swift */; };
+		E00002 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00002 /* AuthManager.swift */; };
+		E00003 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00003 /* KeychainManager.swift */; };
+		E00004 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00004 /* Models.swift */; };
+		E00005 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00005 /* Comment.swift */; };
+		E00006 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00006 /* Constants.swift */; };
+		E00007 /* VideoPlayerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00007 /* VideoPlayerManager.swift */; };
+		E00008 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00008 /* MainTabView.swift */; };
+		E00009 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00009 /* WelcomeView.swift */; };
+		E00010 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00010 /* LoginView.swift */; };
+		E00011 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00011 /* RegisterView.swift */; };
+		E00012 /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00012 /* FeedView.swift */; };
+		E00013 /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00013 /* FeedViewModel.swift */; };
+		E00014 /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00014 /* VideoPlayerView.swift */; };
+		E00015 /* VideoOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00015 /* VideoOverlayView.swift */; };
+		E00016 /* CommentSheetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00016 /* CommentSheetData.swift */; };
+		E00017 /* CommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00017 /* CommentsView.swift */; };
+		E00018 /* CommentsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00018 /* CommentsViewModel.swift */; };
+		E00019 /* DiscoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00019 /* DiscoverView.swift */; };
+		E00020 /* DiscoverViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00020 /* DiscoverViewModel.swift */; };
+		E00021 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00021 /* ProfileView.swift */; };
+		E00022 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00022 /* ProfileViewModel.swift */; };
+		E00023 /* UploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00023 /* UploadView.swift */; };
+		E00024 /* UploadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00024 /* UploadViewModel.swift */; };
+		E00025 /* InboxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00025 /* InboxView.swift */; };
+		E00026 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00026 /* EditProfileView.swift */; };
+		E00027 /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00027 /* EditProfileViewModel.swift */; };
+		E00028 /* BookmarksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00028 /* BookmarksView.swift */; };
+		E00029 /* BookmarksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00029 /* BookmarksViewModel.swift */; };
+		E00030 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00030 /* SearchView.swift */; };
+		E00031 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00031 /* SearchViewModel.swift */; };
+		E00034 /* ChangeUsernameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00034 /* ChangeUsernameView.swift */; };
+		E00035 /* ChangeUsernameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00035 /* ChangeUsernameViewModel.swift */; };
+		E00036 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00036 /* SettingsView.swift */; };
+		E00037 /* UsernameSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00037 /* UsernameSetupView.swift */; };
+		E00038 /* UsernameSetupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00038 /* UsernameSetupViewModel.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		B10001 /* Rift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rift.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B00000 /* RiftApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiftApp.swift; sourceTree = "<group>"; };
+		B00002 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B00004 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B00007 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		B00021 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C00000 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		C00001 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		C00002 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
+		C00003 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
+		C00004 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		C00005 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		C00006 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		C00007 /* VideoPlayerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerManager.swift; sourceTree = "<group>"; };
+		C00008 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		C00009 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
+		C00010 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		C00011 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		C00012 /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
+		C00013 /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
+		C00014 /* VideoPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerView.swift; sourceTree = "<group>"; };
+		C00015 /* VideoOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoOverlayView.swift; sourceTree = "<group>"; };
+		C00016 /* CommentSheetData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentSheetData.swift; sourceTree = "<group>"; };
+		C00017 /* CommentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsView.swift; sourceTree = "<group>"; };
+		C00018 /* CommentsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewModel.swift; sourceTree = "<group>"; };
+		C00019 /* DiscoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverView.swift; sourceTree = "<group>"; };
+		C00020 /* DiscoverViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverViewModel.swift; sourceTree = "<group>"; };
+		C00021 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		C00022 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		C00023 /* UploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadView.swift; sourceTree = "<group>"; };
+		C00024 /* UploadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewModel.swift; sourceTree = "<group>"; };
+		C00025 /* InboxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxView.swift; sourceTree = "<group>"; };
+		C00026 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
+		C00027 /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
+		C00028 /* BookmarksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksView.swift; sourceTree = "<group>"; };
+		C00029 /* BookmarksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksViewModel.swift; sourceTree = "<group>"; };
+		C00030 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		C00031 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		C00034 /* ChangeUsernameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeUsernameView.swift; sourceTree = "<group>"; };
+		C00035 /* ChangeUsernameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeUsernameViewModel.swift; sourceTree = "<group>"; };
+		C00036 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		C00037 /* UsernameSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsernameSetupView.swift; sourceTree = "<group>"; };
+		C00038 /* UsernameSetupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsernameSetupViewModel.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B10002 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B10000 = {
+			isa = PBXGroup;
+			children = (
+				B10003 /* Rift */,
+				B10004 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B10003 /* Rift */ = {
+			isa = PBXGroup;
+			children = (
+				B00021 /* Info.plist */,
+				B00000 /* RiftApp.swift */,
+				B00002 /* ContentView.swift */,
+				B00004 /* Assets.xcassets */,
+				B10016 /* Preview Content */,
+				D00000 /* Core */,
+				D00007 /* Features */,
+			);
+			path = Rift;
+			sourceTree = "<group>";
+		};
+		B10004 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B10001 /* Rift.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B10016 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				B00007 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		D00000 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				D00001 /* Network */,
+				D00002 /* Authentication */,
+				D00003 /* Models */,
+				D00004 /* Utils */,
+				D00005 /* Video */,
+				D00006 /* Navigation */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		D00001 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				C00000 /* NetworkManager.swift */,
+				C00001 /* APIService.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		D00002 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				C00002 /* AuthManager.swift */,
+				C00003 /* KeychainManager.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		D00003 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C00004 /* Models.swift */,
+				C00005 /* Comment.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		D00004 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				C00006 /* Constants.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		D00005 /* Video */ = {
+			isa = PBXGroup;
+			children = (
+				C00007 /* VideoPlayerManager.swift */,
+			);
+			path = Video;
+			sourceTree = "<group>";
+		};
+		D00006 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				C00008 /* MainTabView.swift */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
+		D00007 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				D00008 /* Auth */,
+				D00009 /* Feed */,
+				D00010 /* Comments */,
+				D00011 /* Discover */,
+				D00012 /* Profile */,
+				D00013 /* Upload */,
+				D00014 /* Inbox */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		D00008 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				C00009 /* WelcomeView.swift */,
+				C00010 /* LoginView.swift */,
+				C00011 /* RegisterView.swift */,
+				C00037 /* UsernameSetupView.swift */,
+				C00038 /* UsernameSetupViewModel.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		D00009 /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				C00012 /* FeedView.swift */,
+				C00013 /* FeedViewModel.swift */,
+				C00014 /* VideoPlayerView.swift */,
+				C00015 /* VideoOverlayView.swift */,
+				C00016 /* CommentSheetData.swift */,
+			);
+			path = Feed;
+			sourceTree = "<group>";
+		};
+		D00010 /* Comments */ = {
+			isa = PBXGroup;
+			children = (
+				C00017 /* CommentsView.swift */,
+				C00018 /* CommentsViewModel.swift */,
+			);
+			path = Comments;
+			sourceTree = "<group>";
+		};
+		D00011 /* Discover */ = {
+			isa = PBXGroup;
+			children = (
+				C00019 /* DiscoverView.swift */,
+				C00020 /* DiscoverViewModel.swift */,
+				C00030 /* SearchView.swift */,
+				C00031 /* SearchViewModel.swift */,
+			);
+			path = Discover;
+			sourceTree = "<group>";
+		};
+		D00012 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				C00021 /* ProfileView.swift */,
+				C00022 /* ProfileViewModel.swift */,
+				C00026 /* EditProfileView.swift */,
+				C00027 /* EditProfileViewModel.swift */,
+				C00028 /* BookmarksView.swift */,
+				C00029 /* BookmarksViewModel.swift */,
+				C00034 /* ChangeUsernameView.swift */,
+				C00035 /* ChangeUsernameViewModel.swift */,
+				C00036 /* SettingsView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		D00013 /* Upload */ = {
+			isa = PBXGroup;
+			children = (
+				C00023 /* UploadView.swift */,
+				C00024 /* UploadViewModel.swift */,
+			);
+			path = Upload;
+			sourceTree = "<group>";
+		};
+		D00014 /* Inbox */ = {
+			isa = PBXGroup;
+			children = (
+				C00025 /* InboxView.swift */,
+			);
+			path = Inbox;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B10005 /* Rift */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B10006 /* Build configuration list for PBXNativeTarget "Rift" */;
+			buildPhases = (
+				B10007 /* Sources */,
+				B10002 /* Frameworks */,
+				B10008 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Rift;
+			productName = Rift;
+			productReference = B10001 /* Rift.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B10009 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+			};
+			buildConfigurationList = B10010 /* Build configuration list for PBXProject "Rift" */;
+			compatibilityVersion = "Xcode 15.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B10000;
+			productRefGroup = B10004 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B10005 /* Rift */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B10008 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B00008 /* Preview Assets.xcassets in Resources */,
+				B00005 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B10007 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B00003 /* ContentView.swift in Sources */,
+				B00001 /* RiftApp.swift in Sources */,
+				E00000 /* NetworkManager.swift in Sources */,
+				E00001 /* APIService.swift in Sources */,
+				E00002 /* AuthManager.swift in Sources */,
+				E00003 /* KeychainManager.swift in Sources */,
+				E00004 /* Models.swift in Sources */,
+				E00005 /* Comment.swift in Sources */,
+				E00006 /* Constants.swift in Sources */,
+				E00007 /* VideoPlayerManager.swift in Sources */,
+				E00008 /* MainTabView.swift in Sources */,
+				E00009 /* WelcomeView.swift in Sources */,
+				E00010 /* LoginView.swift in Sources */,
+				E00011 /* RegisterView.swift in Sources */,
+				E00012 /* FeedView.swift in Sources */,
+				E00013 /* FeedViewModel.swift in Sources */,
+				E00014 /* VideoPlayerView.swift in Sources */,
+				E00015 /* VideoOverlayView.swift in Sources */,
+				E00016 /* CommentSheetData.swift in Sources */,
+				E00017 /* CommentsView.swift in Sources */,
+				E00018 /* CommentsViewModel.swift in Sources */,
+				E00019 /* DiscoverView.swift in Sources */,
+				E00020 /* DiscoverViewModel.swift in Sources */,
+				E00021 /* ProfileView.swift in Sources */,
+				E00022 /* ProfileViewModel.swift in Sources */,
+				E00023 /* UploadView.swift in Sources */,
+				E00024 /* UploadViewModel.swift in Sources */,
+				E00025 /* InboxView.swift in Sources */,
+				E00026 /* EditProfileView.swift in Sources */,
+				E00027 /* EditProfileViewModel.swift in Sources */,
+				E00028 /* BookmarksView.swift in Sources */,
+				E00029 /* BookmarksViewModel.swift in Sources */,
+				E00030 /* SearchView.swift in Sources */,
+				E00031 /* SearchViewModel.swift in Sources */,
+				E00034 /* ChangeUsernameView.swift in Sources */,
+				E00035 /* ChangeUsernameViewModel.swift in Sources */,
+				E00036 /* SettingsView.swift in Sources */,
+				E00037 /* UsernameSetupView.swift in Sources */,
+				E00038 /* UsernameSetupViewModel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		B10011 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		B10012 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		B10013 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGNING_REQUIRED = NO;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Rift/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Rift/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rift.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B10014 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGNING_REQUIRED = NO;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Rift/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Rift/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rift.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B10006 /* Build configuration list for PBXNativeTarget "Rift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B10013 /* Debug */,
+				B10014 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B10010 /* Build configuration list for PBXProject "Rift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B10011 /* Debug */,
+				B10012 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B10009 /* Project object */;
+}

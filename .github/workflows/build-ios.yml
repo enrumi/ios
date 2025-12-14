@@ -1,0 +1,202 @@
+name: Build Rift iOS IPA
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: macos-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Xcode
+      uses: maxim-lobanov/setup-xcode@v1
+      with:
+        xcode-version: latest-stable
+    
+    - name: List directory structure
+      run: |
+        echo "📁 Project structure:"
+        ls -la
+        echo ""
+        echo "📱 Xcode project:"
+        ls -la Rift.xcodeproj/
+    
+    - name: Build Archive
+      run: |
+        xcodebuild -project Rift.xcodeproj \
+          -scheme Rift \
+          -sdk iphoneos \
+          -configuration Release \
+          -archivePath $PWD/build/Rift.xcarchive \
+          archive \
+          CODE_SIGN_IDENTITY="" \
+          CODE_SIGNING_REQUIRED=NO \
+          CODE_SIGNING_ALLOWED=NO
+    
+    - name: Create unsigned IPA
+      run: |
+        mkdir -p build/Payload
+        cp -r build/Rift.xcarchive/Products/Applications/Rift.app build/Payload/
+        cd build
+        zip -r Rift-unsigned.ipa Payload
+        rm -rf Payload
+        ls -lh Rift-unsigned.ipa
+    
+    - name: Upload IPA
+      uses: actions/upload-artifact@v4
+      with:
+        name: Rift-IPA
+        path: build/*.ipa
+    
+    - name: Create Release
+      if: startsWith(github.ref, 'refs/tags/')
+      uses: softprops/action-gh-release@v2
+      with:
+        files: build/*.ipa
+        body: |
+          ## 🎬 Rift - TikTok Clone for iOS
+          
+          **A full-featured TikTok clone built with SwiftUI**
+          
+          ### 📱 Installation
+          1. Download the `Rift-unsigned.ipa` file
+          2. Sideload using one of these tools:
+             - **AltStore** (recommended for free accounts)
+             - **Sideloadly** (Windows/Mac)
+             - **TrollStore** (if available for your iOS version)
+          3. Trust the certificate in Settings → General → VPN & Device Management
+          
+          ### ✨ Features
+          
+          **Feed (Home):**
+          - ⬆️ Vertical video paging (swipe up/down)
+          - 💗 Double tap to like with heart animation
+          - 👆 Single tap to pause/play
+          - 💬 Comments sheet
+          - 📳 Haptic feedback
+          - 🔄 Auto-play/pause
+          - ♾️ Infinite scroll with pagination
+          
+          **Discover:**
+          - 🔍 Search videos and users
+          - 📊 Trending hashtags
+          - 🎞️ 3-column video grid
+          - 🏆 Popular content
+          
+          **Upload:**
+          - 📤 Upload videos from camera roll
+          - ✏️ Add captions
+          - 📹 Video preview with AVPlayer
+          - ☁️ Direct upload to MinIO storage
+          
+          **Profile:**
+          - 👤 User profile with stats
+          - 📊 Following, Followers, Likes count
+          - 🎬 Video grid (3 columns)
+          - ➕ Follow/Unfollow button
+          - ⚙️ Edit profile
+          - 🚪 Logout
+          
+          **Comments:**
+          - 💬 View all comments
+          - ✍️ Post new comments
+          - 📱 Sheet with drag-to-dismiss
+          - ⚡ Real-time updates
+          
+          **Authentication:**
+          - 🔐 Login/Register
+          - 🔑 JWT token authentication
+          - 🔒 Secure keychain storage
+          - 🔄 Auto token refresh
+          
+          ### 🔧 Backend Setup Required
+          
+          This app requires a backend server. You need to:
+          
+          1. **Clone the repository**
+          2. **Start the backend:**
+             ```bash
+             cd rift
+             docker compose up -d
+             cd backend
+             npm install
+             npm run db:migrate
+             npm run db:seed
+             npm run dev
+             ```
+          3. **Update server IP in the app:**
+             - Open `rift/ios/Rift/Core/Utils/Constants.swift`
+             - Change `baseURL` to your server's IP address
+             - Rebuild the app
+          
+          ### 📝 Default Test Accounts
+          
+          After running `npm run db:seed`:
+          - Username: `alex_dev` | Password: `password123`
+          - Username: `sarah_creative` | Password: `password123`
+          
+          ### 🏗️ Tech Stack
+          
+          **iOS (Frontend):**
+          - SwiftUI (iOS 17+)
+          - AVFoundation (video playback)
+          - MVVM architecture
+          - Combine framework
+          - PhotosPicker
+          - Keychain for secure storage
+          
+          **Backend:**
+          - Node.js + TypeScript
+          - Fastify (web framework)
+          - PostgreSQL (database)
+          - Prisma (ORM)
+          - MinIO (S3-compatible storage)
+          - JWT authentication
+          - Docker Compose
+          
+          ### 📚 API Endpoints
+          
+          - Auth: Login, Register, Logout, Refresh token
+          - Users: Profile, Edit, Follow/Unfollow
+          - Videos: Create, Get, Delete, Feed
+          - Interactions: Like, Comment, Share
+          - Search: Videos, Users, Hashtags
+          - Upload: Presigned URLs for direct upload
+          
+          ### ⚠️ Important Notes
+          
+          - **Unsigned IPA:** You need to sign it yourself or use a sideloading tool
+          - **Backend Required:** The app won't work without a running backend server
+          - **Network Access:** Ensure your iPhone can reach the backend server IP
+          - **iOS 17+:** Minimum iOS version required
+          
+          ### 🐛 Known Issues
+          
+          - Video preloading not implemented (may cause stuttering on slow connections)
+          - Some placeholder features (Inbox/Notifications)
+          
+          ### 📖 Documentation
+          
+          - Full API docs: `rift/backend/API.md`
+          - iOS setup: `rift/ios/README.md`
+          - Backend setup: `rift/backend/README.md`
+          
+          ### 🤝 Contributing
+          
+          This is a demonstration project showing how to build a production-quality TikTok clone.
+          Feel free to use it for learning purposes!
+          
+          ---
+          
+          **Built with ❤️ using SwiftUI and Node.js**
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
