@@ -35,49 +35,71 @@ struct FeedView: View {
     
     // MARK: - Video Feed
     private func videoFeed(geometry: GeometryProxy) -> some View {
-        TabView(selection: $viewModel.currentVideoIndex) {
+        let tabView = TabView(selection: $viewModel.currentVideoIndex) {
             ForEach(Array(viewModel.videos.enumerated()), id: \.element.id) { index, video in
-                VideoFeedCell(
-                    video: video,
-                    playerManager: playerManager,
-                    isCurrentVideo: index == viewModel.currentVideoIndex,
-                    onLike: {
-                        Task {
-                            await viewModel.toggleLike(videoId: video.id)
-                        }
-                    },
-                    onComment: {
-                        viewModel.showCommentsForVideo = video.id
-                    },
-                    onShare: {
-                        viewModel.showShareForVideo = video.id
-                    },
-                    onBookmark: {
-                        Task {
-                            await viewModel.toggleBookmark(videoId: video.id)
-                        }
-                    },
-                    onProfileTap: {
-                        viewModel.showProfileForUser = video.user?.id
-                    }
-                )
-                .tag(index)
+                createVideoCell(for: video, at: index)
+                    .tag(index)
             }
         }
         .tabViewStyle(.page(indexDisplayMode: .never))
         .ignoresSafeArea()
         .onChange(of: viewModel.currentVideoIndex) { oldValue, newValue in
-            // Load more if needed
             viewModel.loadMoreIfNeeded(currentIndex: newValue)
         }
-        .sheet(item: Binding(
+        
+        return tabView
+            .sheet(item: commentsBinding) { data in
+                CommentsView(videoId: data.videoId)
+                    .presentationDetents([.medium, .large])
+                    .presentationDragIndicator(.visible)
+            }
+            .sheet(item: profileBinding) { data in
+                NavigationStack {
+                    ProfileView(userId: data.userId)
+                        .environmentObject(AuthManager.shared)
+                }
+            }
+    }
+    
+    // MARK: - Helpers
+    private var commentsBinding: Binding<CommentSheetData?> {
+        Binding(
             get: { viewModel.showCommentsForVideo.map { CommentSheetData(videoId: $0) } },
             set: { viewModel.showCommentsForVideo = $0?.videoId }
-        )) { data in
-            CommentsView(videoId: data.videoId)
-                .presentationDetents([.medium, .large])
-                .presentationDragIndicator(.visible)
-        }
+        )
+    }
+    
+    private var profileBinding: Binding<UserProfileData?> {
+        Binding(
+            get: { viewModel.showProfileForUser.map { UserProfileData(userId: $0) } },
+            set: { viewModel.showProfileForUser = $0?.userId }
+        )
+    }
+    
+    private func createVideoCell(for video: Video, at index: Int) -> some View {
+        VideoFeedCell(
+            video: video,
+            playerManager: playerManager,
+            isCurrentVideo: index == viewModel.currentVideoIndex,
+            onLike: { handleLike(videoId: video.id) },
+            onComment: { viewModel.showCommentsForVideo = video.id },
+            onShare: { viewModel.shareVideo(videoId: video.id) },
+            onBookmark: { handleBookmark(videoId: video.id) },
+            onProfileTap: { viewModel.showProfileForUser = video.user?.id },
+            onVideoView: { handleVideoView(videoId: video.id) }
+        )
+    }
+    
+    private func handleLike(videoId: String) {
+        Task { await viewModel.toggleLike(videoId: videoId) }
+    }
+    
+    private func handleBookmark(videoId: String) {
+        Task { await viewModel.toggleBookmark(videoId: videoId) }
+    }
+    
+    private func handleVideoView(videoId: String) {
+        Task { await viewModel.trackVideoView(videoId: videoId) }
     }
     
     // MARK: - Empty State
@@ -108,6 +130,7 @@ struct VideoFeedCell: View {
     let onShare: () -> Void
     let onBookmark: () -> Void
     let onProfileTap: () -> Void
+    let onVideoView: () -> Void
     
     @State private var showHeart = false
     
@@ -153,6 +176,7 @@ struct VideoFeedCell: View {
         }
         .onAppear {
             setupVideo()
+            onVideoView()
         }
         .onDisappear {
             playerManager.pause()
@@ -170,13 +194,17 @@ struct VideoFeedCell: View {
     private func setupVideo() {
         guard isCurrentVideo else { return }
         
+        print("📹 Setting up video: \(video.videoUrl)")
+        
         guard let url = URL(string: video.videoUrl) else {
             print("❌ Invalid video URL: \(video.videoUrl)")
             return
         }
         
+        print("✅ Video URL is valid: \(url)")
         playerManager.setupPlayer(for: url)
         playerManager.play()
+        print("▶️ Video should be playing now")
     }
     
     // MARK: - Handle Like
@@ -207,6 +235,12 @@ struct VideoFeedCell: View {
             showHeart = false
         }
     }
+}
+
+// MARK: - Helper Types
+struct UserProfileData: Identifiable {
+    let id = UUID()
+    let userId: String
 }
 
 #Preview {

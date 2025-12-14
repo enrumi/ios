@@ -158,9 +158,21 @@ struct VideoThumbnailCell: View {
                         .aspectRatio(9/16, contentMode: .fill)
                 }
             } else {
+                // Fallback: show gradient
                 Rectangle()
-                    .fill(Color.gray.opacity(0.3))
+                    .fill(
+                        LinearGradient(
+                            colors: [Color.purple.opacity(0.6), Color.pink.opacity(0.6)],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                    )
                     .aspectRatio(9/16, contentMode: .fill)
+                    .overlay(
+                        Image(systemName: "play.circle.fill")
+                            .font(.system(size: 40))
+                            .foregroundColor(.white.opacity(0.8))
+                    )
             }
             
             // View count overlay

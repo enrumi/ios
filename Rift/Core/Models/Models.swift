@@ -42,8 +42,8 @@ struct Video: Codable, Identifiable {
     let isPublic: Bool?
     var likeCount: Int
     let commentCount: Int
-    let viewCount: Int
-    let shareCount: Int?
+    var viewCount: Int
+    var shareCount: Int?
     var isLiked: Bool?
     let createdAt: String
     let updatedAt: String?
@@ -94,4 +94,21 @@ struct ErrorResponse: Codable {
 // MARK: - Empty Response
 struct EmptyResponse: Codable {
     // Used for API endpoints that return no data (e.g., DELETE, some POST)
+}
+
+// MARK: - Notification
+struct Notification: Codable, Identifiable {
+    let id: String
+    let type: String // "like", "comment", "follow"
+    let message: String
+    let fromUser: User?
+    let video: Video?
+    let createdAt: String
+    let isRead: Bool?
+    
+    enum CodingKeys: String, CodingKey {
+        case id, type, message, video, createdAt
+        case fromUser = "from_user"
+        case isRead = "is_read"
+    }
 }

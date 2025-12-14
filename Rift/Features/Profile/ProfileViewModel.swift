@@ -56,8 +56,15 @@ class ProfileViewModel: ObservableObject {
     
     // MARK: - Toggle Follow
     func toggleFollow() async {
-        guard let user = user else { return }
+        guard let user = user else {
+            print("❌ No user to follow")
+            return
+        }
+        
         let isFollowing = user.isFollowing ?? false
+        let username = user.username
+        
+        print("📍 Toggle follow for @\(username), currently following: \(isFollowing)")
         
         // Optimistic update
         self.user?.isFollowing = !isFollowing
@@ -66,25 +73,24 @@ class ProfileViewModel: ObservableObject {
         }
         
         do {
-            struct FollowRequest: Codable {
-                let followingId: String
-            }
-            
             if isFollowing {
                 // Unfollow
+                print("🔄 Unfollowing @\(username)...")
                 let _: EmptyResponse = try await APIService.shared.request(
-                    endpoint: "\(Constants.API.Endpoints.follows)/\(user.id)",
+                    endpoint: "/users/\(username)/follow",
                     method: .DELETE,
                     requiresAuth: true
                 )
+                print("✅ Unfollowed @\(username)")
             } else {
                 // Follow
+                print("🔄 Following @\(username)...")
                 let _: EmptyResponse = try await APIService.shared.request(
-                    endpoint: Constants.API.Endpoints.follows,
+                    endpoint: "/users/\(username)/follow",
                     method: .POST,
-                    body: FollowRequest(followingId: user.id),
                     requiresAuth: true
                 )
+                print("✅ Followed @\(username)")
             }
         } catch {
             // Revert on error

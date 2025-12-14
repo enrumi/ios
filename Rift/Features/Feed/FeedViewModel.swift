@@ -7,6 +7,7 @@
 
 import Foundation
 import AVFoundation
+import UIKit
 
 @MainActor
 class FeedViewModel: ObservableObject {
@@ -77,23 +78,18 @@ class FeedViewModel: ObservableObject {
         videos[index].likeCount += isLiked ? -1 : 1
         
         do {
-            struct LikeRequest: Codable {
-                let videoId: String
-            }
-            
             if isLiked {
                 // Unlike
                 let _: EmptyResponse = try await APIService.shared.request(
-                    endpoint: Constants.API.Endpoints.likes + "/\(videoId)",
+                    endpoint: "/videos/\(videoId)/like",
                     method: .DELETE,
                     requiresAuth: true
                 )
             } else {
                 // Like
                 let _: EmptyResponse = try await APIService.shared.request(
-                    endpoint: Constants.API.Endpoints.likes,
+                    endpoint: "/videos/\(videoId)/like",
                     method: .POST,
-                    body: LikeRequest(videoId: videoId),
                     requiresAuth: true
                 )
             }
@@ -123,6 +119,56 @@ class FeedViewModel: ObservableObject {
         } catch {
             print("❌ Failed to toggle bookmark: \(error)")
         }
+    }
+    
+    // MARK: - Share Video
+    func shareVideo(videoId: String) {
+        guard let video = videos.first(where: { $0.id == videoId }) else { return }
+        
+        // Increment share count
+        if let index = videos.firstIndex(where: { $0.id == videoId }) {
+            videos[index].shareCount = (videos[index].shareCount ?? 0) + 1
+        }
+        
+        // Create share URL
+        let shareURL = "\(Constants.API.baseURL)/videos/\(videoId)"
+        let shareText = video.caption ?? "Check out this video on Rift!"
+        
+        // Show iOS share sheet
+        let activityVC = UIActivityViewController(
+            activityItems: [shareText, URL(string: shareURL)!],
+            applicationActivities: nil
+        )
+        
+        // Present share sheet
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let window = windowScene.windows.first,
+           let rootVC = window.rootViewController {
+            rootVC.present(activityVC, animated: true)
+        }
+        
+        // Update share count on backend
+        Task {
+            await updateShareCount(videoId: videoId)
+        }
+    }
+    
+    // MARK: - Update Share Count
+    private func updateShareCount(videoId: String) async {
+        // Backend doesn't have share endpoint yet, but we track it locally
+        print("✅ Video shared: \(videoId)")
+    }
+    
+    // MARK: - Track Video View
+    func trackVideoView(videoId: String) async {
+        // Update view count locally
+        if let index = videos.firstIndex(where: { $0.id == videoId }) {
+            videos[index].viewCount += 1
+        }
+        
+        // This would normally call backend to increment view count
+        // Backend should track unique views per user
+        print("📊 Video view tracked: \(videoId)")
     }
     
     // MARK: - Pagination

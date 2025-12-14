@@ -64,7 +64,6 @@ class NetworkManager {
         
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
         // Add custom headers
         headers?.forEach { key, value in
@@ -73,6 +72,7 @@ class NetworkManager {
         
         // Encode body if present
         if let body = body {
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
             request.httpBody = try JSONEncoder().encode(body)
         }
         

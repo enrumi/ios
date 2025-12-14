@@ -37,6 +37,7 @@
 		E00023 /* UploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00023 /* UploadView.swift */; };
 		E00024 /* UploadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00024 /* UploadViewModel.swift */; };
 		E00025 /* InboxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00025 /* InboxView.swift */; };
+		E00025A /* InboxViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00025A /* InboxViewModel.swift */; };
 		E00026 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00026 /* EditProfileView.swift */; };
 		E00027 /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00027 /* EditProfileViewModel.swift */; };
 		E00028 /* BookmarksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00028 /* BookmarksView.swift */; };
@@ -83,6 +84,7 @@
 		C00023 /* UploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadView.swift; sourceTree = "<group>"; };
 		C00024 /* UploadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewModel.swift; sourceTree = "<group>"; };
 		C00025 /* InboxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxView.swift; sourceTree = "<group>"; };
+		C00025A /* InboxViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxViewModel.swift; sourceTree = "<group>"; };
 		C00026 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		C00027 /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
 		C00028 /* BookmarksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksView.swift; sourceTree = "<group>"; };
@@ -296,6 +298,7 @@
 			isa = PBXGroup;
 			children = (
 				C00025 /* InboxView.swift */,
+				C00025A /* InboxViewModel.swift */,
 			);
 			path = Inbox;
 			sourceTree = "<group>";
@@ -393,6 +396,7 @@
 				E00023 /* UploadView.swift in Sources */,
 				E00024 /* UploadViewModel.swift in Sources */,
 				E00025 /* InboxView.swift in Sources */,
+				E00025A /* InboxViewModel.swift in Sources */,
 				E00026 /* EditProfileView.swift in Sources */,
 				E00027 /* EditProfileViewModel.swift in Sources */,
 				E00028 /* BookmarksView.swift in Sources */,

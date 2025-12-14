@@ -22,7 +22,7 @@ struct VideoOverlayView: View {
                 Spacer()
                 
                 rightSideActions
-                    .padding(.bottom, 120)
+                    .padding(.bottom, 100)
             }
             .frame(maxWidth: .infinity, alignment: .trailing)
             .padding(.trailing, 12)
@@ -32,8 +32,6 @@ struct VideoOverlayView: View {
                 Spacer()
                 
                 bottomInfo
-                    .padding(.horizontal, 16)
-                    .padding(.bottom, 20)
             }
         }
     }
@@ -105,7 +103,7 @@ struct VideoOverlayView: View {
             // Share
             ActionButton(
                 icon: "arrowshape.turn.up.right.fill",
-                count: nil,
+                count: video.shareCount,
                 color: .white,
                 action: onShare
             )
@@ -117,10 +115,18 @@ struct VideoOverlayView: View {
         VStack(alignment: .leading, spacing: 8) {
             // Username
             if let user = video.user {
-                Text("@\(user.username)")
-                    .font(.system(size: 16, weight: .semibold))
-                    .foregroundColor(.white)
-                    .shadow(color: .black.opacity(0.5), radius: 2, x: 0, y: 1)
+                HStack(spacing: 8) {
+                    Text("@\(user.username)")
+                        .font(.system(size: 16, weight: .semibold))
+                        .foregroundColor(.white)
+                    
+                    if user.isVerified == true {
+                        Image(systemName: "checkmark.seal.fill")
+                            .font(.system(size: 14))
+                            .foregroundColor(.blue)
+                    }
+                }
+                .shadow(color: .black.opacity(0.8), radius: 4, x: 0, y: 2)
             }
             
             // Caption
@@ -129,10 +135,40 @@ struct VideoOverlayView: View {
                     .font(.system(size: 15))
                     .foregroundColor(.white)
                     .lineLimit(2)
-                    .shadow(color: .black.opacity(0.5), radius: 2, x: 0, y: 1)
+                    .shadow(color: .black.opacity(0.8), radius: 4, x: 0, y: 2)
             }
+            
+            // View count
+            Text("\(formatCount(video.viewCount)) views")
+                .font(.system(size: 13))
+                .foregroundColor(.white.opacity(0.8))
+                .shadow(color: .black.opacity(0.8), radius: 4, x: 0, y: 2)
         }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 16)
+        .padding(.bottom, 40)
         .frame(maxWidth: .infinity, alignment: .leading)
+        .background(
+            LinearGradient(
+                gradient: Gradient(colors: [
+                    Color.black.opacity(0),
+                    Color.black.opacity(0.7),
+                    Color.black.opacity(0.85)
+                ]),
+                startPoint: .top,
+                endPoint: .bottom
+            )
+        )
+    }
+    
+    private func formatCount(_ count: Int) -> String {
+        if count >= 1_000_000 {
+            return String(format: "%.1fM", Double(count) / 1_000_000)
+        } else if count >= 1_000 {
+            return String(format: "%.1fK", Double(count) / 1_000)
+        } else {
+            return "\(count)"
+        }
     }
 }
 

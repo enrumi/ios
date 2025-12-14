@@ -276,7 +276,12 @@ struct ProfileView: View {
             spacing: 2
         ) {
             ForEach(viewModel.videos) { video in
-                VideoThumbnailCell(video: video)
+                Button {
+                    // TODO: Open video in full screen player
+                    print("🎥 Open video: \(video.id)")
+                } label: {
+                    VideoThumbnailCell(video: video)
+                }
             }
         }
     }

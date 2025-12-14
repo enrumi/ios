@@ -23,12 +23,14 @@ class CommentsViewModel: ObservableObject {
         do {
             struct CommentsResponse: Codable {
                 let comments: [Comment]
+                let nextCursor: String?
+                let hasMore: Bool
             }
             
             let response: CommentsResponse = try await APIService.shared.request(
-                endpoint: "\(Constants.API.Endpoints.videos)/\(videoId)/comments",
+                endpoint: "/videos/\(videoId)/comments",
                 method: .GET,
-                requiresAuth: true
+                requiresAuth: false
             )
             
             comments = response.comments
@@ -43,29 +45,19 @@ class CommentsViewModel: ObservableObject {
     // MARK: - Post Comment
     func postComment(videoId: String, text: String) async {
         struct CommentRequest: Codable {
-            let videoId: String
             let text: String
-            
-            enum CodingKeys: String, CodingKey {
-                case videoId = "video_id"
-                case text
-            }
         }
         
         do {
-            struct CommentResponse: Codable {
-                let comment: Comment
-            }
-            
-            let response: CommentResponse = try await APIService.shared.request(
-                endpoint: Constants.API.Endpoints.comments,
+            let newComment: Comment = try await APIService.shared.request(
+                endpoint: "/videos/\(videoId)/comments",
                 method: .POST,
-                body: CommentRequest(videoId: videoId, text: text),
+                body: CommentRequest(text: text),
                 requiresAuth: true
             )
             
             // Add new comment to the top
-            comments.insert(response.comment, at: 0)
+            comments.insert(newComment, at: 0)
         } catch {
             errorMessage = error.localizedDescription
             print("❌ Failed to post comment: \(error)")

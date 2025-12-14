@@ -24,31 +24,43 @@ struct VideoPlayerView: View {
 struct CustomVideoPlayerView: UIViewRepresentable {
     let player: AVPlayer
     
-    func makeUIView(context: Context) -> UIView {
-        let view = UIView(frame: .zero)
-        view.backgroundColor = .black
-        
-        let playerLayer = AVPlayerLayer(player: player)
-        playerLayer.videoGravity = .resizeAspectFill
-        playerLayer.frame = view.bounds
-        view.layer.addSublayer(playerLayer)
-        
-        context.coordinator.playerLayer = playerLayer
-        
+    func makeUIView(context: Context) -> PlayerView {
+        let view = PlayerView()
+        view.player = player
         return view
     }
     
-    func updateUIView(_ uiView: UIView, context: Context) {
-        if let playerLayer = context.coordinator.playerLayer {
-            playerLayer.frame = uiView.bounds
+    func updateUIView(_ uiView: PlayerView, context: Context) {
+        uiView.player = player
+    }
+}
+
+// Custom UIView with AVPlayerLayer
+class PlayerView: UIView {
+    var player: AVPlayer? {
+        get {
+            return playerLayer.player
+        }
+        set {
+            playerLayer.player = newValue
         }
     }
     
-    func makeCoordinator() -> Coordinator {
-        Coordinator()
+    override class var layerClass: AnyClass {
+        return AVPlayerLayer.self
     }
     
-    class Coordinator {
-        var playerLayer: AVPlayerLayer?
+    var playerLayer: AVPlayerLayer {
+        return layer as! AVPlayerLayer
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        backgroundColor = .black
+        playerLayer.videoGravity = .resizeAspectFill
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
